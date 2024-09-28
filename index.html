@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Fornite Creator Code Searcher" property="og:title" />
+    <meta content="search your creator code or a youtubers creator code and get there exact fortnite username" property="og:description" />
+    <title>Fortnite Creator Code Searcher</title>
+    <script>
+        function searchCreator()
+        {
+            var theCreatorcode = document.getElementById("creatorcode").value;
+            var requester = new XMLHttpRequest();
+            requester.open("GET", "https://fortnite-api.com/v2/creatorcode?name=" + theCreatorcode);
+            requester.onreadystatechange = function() {
+                if (requester.readyState === 4) 
+                {
+                    if (requester.status === 200) 
+                    { 
+                        var response = JSON.parse(requester.responseText);
+                        document.getElementById("cr").innerText = response.data.account.name;
+                        document.getElementById("ownerid").innerText = response.data.account.id;
+                    }
+                    
+                }
+            }
+            requester.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>Fortnite Creator Code Searcher</h2>
+    <p>The information pulled with this website is from FortniteAPI.com</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <textarea id="creatorcode" rows="1" cols="30" style="resize: none;", placeholder="com.AnotherAxiom.GorillaTag"></textarea>   
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>Creator Code Owner: <a id="cr"></a> </h2> 
+    <h2>Creator Code Owner Id: <a id="ownerid"></a> </h2> 
+    <br>
+    <button onclick="searchCreator()">
+        Search Creator
+    </button>
+</body>
+</html>
